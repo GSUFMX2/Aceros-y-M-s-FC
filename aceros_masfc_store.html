@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aceros y Más FC - Tienda Virtual</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Encabezado -->
+  <header class="bg-blue-800 text-white p-6">
+    <h1 class="text-3xl font-bold text-center">Aceros y Más FC</h1>
+    <p class="text-center">Soluciones en acero para tu construcción</p>
+  </header>
+
+  <!-- Tienda Virtual -->
+  <section class="py-10 px-4 max-w-6xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6">Catálogo de Productos</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Producto 1 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img src="https://via.placeholder.com/300x200?text=Varilla" alt="Varilla" class="w-full h-40 object-cover mb-4">
+        <h3 class="text-lg font-bold">Varilla de Acero 3/8"</h3>
+        <p class="mb-2">Ideal para estructuras ligeras. Precio por metro.</p>
+        <p class="text-blue-600 font-semibold">$22.00 MXN</p>
+        <button onclick="addToCart('Varilla de Acero 3/8', 22)" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded">Agregar al carrito</button>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img src="https://via.placeholder.com/300x200?text=Lamina" alt="Lamina" class="w-full h-40 object-cover mb-4">
+        <h3 class="text-lg font-bold">Lámina Galvanizada</h3>
+        <p class="mb-2">Lámina calibre 26 de alta resistencia. Precio por hoja.</p>
+        <p class="text-blue-600 font-semibold">$135.00 MXN</p>
+        <button onclick="addToCart('Lámina Galvanizada', 135)" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded">Agregar al carrito</button>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="bg-white rounded-lg shadow p-4">
+        <img src="https://via.placeholder.com/300x200?text=Tubular" alt="Tubular" class="w-full h-40 object-cover mb-4">
+        <h3 class="text-lg font-bold">Tubo Estructural</h3>
+        <p class="mb-2">Tubo cuadrado de acero, ideal para estructuras.</p>
+        <p class="text-blue-600 font-semibold">$88.00 MXN</p>
+        <button onclick="addToCart('Tubo Estructural', 88)" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded">Agregar al carrito</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Carrito -->
+  <section class="bg-white py-8 px-4 max-w-4xl mx-auto mt-8 rounded shadow">
+    <h2 class="text-xl font-bold mb-4">Carrito de compras</h2>
+    <ul id="cart" class="mb-4 space-y-2"></ul>
+    <p id="total" class="font-bold">Total: $0.00</p>
+  </section>
+
+  <!-- Pie de página -->
+  <footer class="bg-gray-800 text-white text-center p-6 mt-10">
+    <p>&copy; 2025 Aceros y Más FC. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart');
+      const totalDisplay = document.getElementById('total');
+      cartList.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        cartList.innerHTML += `<li>${item.name} - $${item.price.toFixed(2)} <button onclick="removeItem(${index})" class="ml-2 text-red-500">Eliminar</button></li>`;
+      });
+
+      totalDisplay.innerText = `Total: $${total.toFixed(2)}`;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+  </script>
+</body>
+</html>
